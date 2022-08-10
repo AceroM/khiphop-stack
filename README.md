@@ -25,8 +25,6 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/acerom/khiphop-stack)
 
-Don't like what's in this stack? Feel free to [create an issue](https://github.com/AceroM/khiphop-stack/issues/new/choose), [fork](https://github.com/AceroM/khiphop-stack/fork) this repo, or clone and make it your own!
-
 ### What's in the stack
 
 - [Netlify](https://netlify.com/) Deployment to the [Edge](https://www.netlify.com/products/edge) + deploy previews and CI/CD
@@ -47,10 +45,12 @@ Don't like what's in this stack? Feel free to [create an issue](https://github.c
 - [Tiny Invariant](https://www.npmjs.com/package/tiny-invariant) Handy tool for validating the existence of variables
 - [Remix Flat Route](https://github.com/kiliman/remix-flat-routes) Flat file directory structure
 
+Don't like what's in this stack? Feel free to [create an issue](https://github.com/AceroM/khiphop-stack/issues/new/choose), [fork](https://github.com/AceroM/khiphop-stack/fork) this repo, or clone and make it your own!
+
 ### Why?
 
 - Netlify has a lot of great features for CICD, DX and you also can opt in for usage on the [Edge](https://www.netlify.com/products/edge/)
-- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and has overall been a smooth developer experience. Since the release of [EdgeDB 2.0](https://www.edgedb.com/blog/edgedb-2-0), it has been easier to visualize the db layer / create queries using the `edgedb ui` command
+- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and overall has a smoother developer experience. Since the release of [EdgeDB 2.0](https://www.edgedb.com/blog/edgedb-2-0), it has been easier to visualize the db layer and create queries using the `edgedb ui` command
 - I want to share my personal codebase preferences :)
 
 This repo is still in active development! To get an idea of what I'm working on, feel free to look at my [TODO](./TODO.md)
@@ -180,7 +180,7 @@ This is a pretty simple CRUD note-taking app, but it's a good example of how you
 
 To set environment variables, you can use the Netlify UI:
 
-![screenshot of env vars in Netlify UI](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1649265873/CleanShot_2022-04-06_at_13.23.38_2x_sh3hoy.jpg)
+![screenshot of env vars in Netlify UI](https://res.cloudinary.com/dbupuyopo/image/upload/v1660164012/netlify-ui_wxgtre.png)
 
 Or you can add your environment variables to an `.env` file (like shown in the sample [`.env.sample`](./.env.sample)) which will not be committed publicly because it is added to the `.gitignore` file. Or you can add it to your Netlify project environment variables (Site settings/Build & deploy/Environment) as shown in the [Development section](#development) so that they can be [easily shared with teammates](https://www.netlify.com/blog/2021/12/09/use-access-and-share-environment-variables-on-netlify).
 
