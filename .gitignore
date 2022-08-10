@@ -1,0 +1,21 @@
+node_modules
+/.cache
+/netlify/functions/server/index.js
+/build
+/public/build
+/.netlify
+
+# Ignore all .env's except for .env.example
+.env*
+!.env.example
+
+
+# Test
+/cypress/screenshots
+/cypress/videos
+/postgres-data
+/coverage
+
+
+/app/styles/tailwind.css
+app/db/edgeql
