@@ -20,7 +20,7 @@ function getRandomString(length) {
 // - Replace our template name for your given app name in the package.json
 // - Add a new .env file for you to use based upon the example file
 async function main({ rootDirectory }) {
-  const EXAMPLE_ENV_PATH = path.join(rootDirectory, ".env.sample");
+  const EXAMPLE_ENV_PATH = path.join(rootDirectory, ".env.example");
   const ENV_PATH = path.join(rootDirectory, ".env");
   const README_PATH = path.join(rootDirectory, "README.md");
   const PACKAGE_JSON_PATH = path.join(rootDirectory, "package.json");
