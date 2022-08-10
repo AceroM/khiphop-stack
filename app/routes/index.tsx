@@ -12,7 +12,6 @@ export async function loader({ request }: LoaderArgs) {
   if (auth.userId) {
     user = await getUserByClerkId(auth.userId);
     if (user) isUserOnboarded = true;
-    else isUserOnboarding = true;
   }
   return json({ isUserOnboarded, isUserOnboarding, user });
 }

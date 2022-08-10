@@ -69,7 +69,21 @@ async function main({ rootDirectory }) {
   ]);
 
   console.log(
-    `Setup is almost complete! Please follow the README for the remaining instructions!`.trim()
+    `Setup is almost complete! Follow these steps to complete initialization:
+- Register for https://clerk.dev/, visit your app -> API KEYS and copy over these values:
+  - CLERK_API_KEY: Backend API keys
+  - CLERK_FRONTEND_API: Frontend API Key
+  - CLERK_JWT_KEY: JWT verification key
+- Set your SESSION_SECRET enviornment variable
+- Run the first build
+  - npm run build
+- Follow the EdgeDB Quickstart to setup EdgeDB Locally: https://www.edgedb.com/docs/guides/quickstart
+- Once EdgeDB is setup, run
+  - edgedb project init
+- You're good to go! 🫡
+  - npm run dev
+  
+For deployment instructions, please read the README.md!`.trim()
   );
 }
 
