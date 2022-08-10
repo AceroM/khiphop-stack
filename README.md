@@ -25,7 +25,7 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/acerom/khiphop-stack)
 
-Don't like what's in this stack? Feel free to open up a PR, Issue, for this repo!
+Don't like what's in this stack? Feel free to open up a PR, create an issue, or fork this repo!
 
 ### What's in the stack
 

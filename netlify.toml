@@ -12,6 +12,9 @@
   to = "/.netlify/functions/server"
   status = 200
 
+[functions]
+  node_bundler = "esbuild"
+
 [[headers]]
   for = "/build/*"
   [headers.values]
