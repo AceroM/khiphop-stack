@@ -2,7 +2,7 @@
 
 Remix + EdgeDB w/access policies + Netlify 🕺
 
-![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660147140/localhost_3000__1_unqbsl.png)
+![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660162528/remix-khiphop-stack_lji9ok.png)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d636d6fa-6538-4a81-97b3-3f5d6ac7b6ec/deploy-status)](https://app.netlify.com/sites/khiphop-stack/deploys)
 
@@ -25,7 +25,7 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/acerom/khiphop-stack)
 
-Don't like what's in this stack? Feel free to open up a PR, create an issue, or fork this repo!
+Don't like what's in this stack? Feel free to [create an issue](https://github.com/AceroM/khiphop-stack/issues/new/choose), [fork](https://github.com/AceroM/khiphop-stack/fork) this repo, or clone and make it your own!
 
 ### What's in the stack
 
@@ -88,6 +88,8 @@ edgedb migration apply
 ```
 
 - Generate the edgedb types required for your project. All your types will now be located in `./app/db/edgeql`
+
+> Note that the generated types are not in the .gitignore since netlify uses them to build your app
 
 ```sh
 npm run generate:eql

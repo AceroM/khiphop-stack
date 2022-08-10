@@ -63,6 +63,7 @@ export async function action({ request, params }: ActionArgs) {
 
 export default function EditNote() {
   const { note } = useLoaderData<typeof loader>();
+  console.log(`note :>> `, note);
   const actionData = useActionData<typeof action>();
   const params = useParams();
 
@@ -71,7 +72,13 @@ export default function EditNote() {
   }, [actionData]);
 
   const [fieldsetProps, { name, description }] = useFieldset(
-    resolve(EditNoteSchema)
+    resolve(EditNoteSchema),
+    {
+      defaultValue: {
+        name: note.name,
+        description: note.description || "",
+      },
+    }
   );
 
   return (
@@ -85,7 +92,7 @@ export default function EditNote() {
             </label>
             <input
               type="text"
-              defaultValue={note.name}
+              placeholder="Note Name..."
               className={cx(
                 "input input-bordered",
                 name.error && "input-error"
@@ -103,7 +110,7 @@ export default function EditNote() {
             </label>
             <input
               type="text"
-              defaultValue={note.description || ""}
+              placeholder="Note Description..."
               className={cx(
                 "input input-bordered",
                 description.error && "input-error"
