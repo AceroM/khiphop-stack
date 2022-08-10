@@ -1,17 +1,18 @@
 # Remix K-Hip Hop Stack
 
-Remix + EdgeDB + Netlify 🕺
+Remix + EdgeDB w/access policies + Netlify 🕺
 
 ![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660147140/localhost_3000__1_unqbsl.png)
 
-Deployed Site: [khiphop-stack.netlify.app](https://khiphop-stack.netlify.app/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d636d6fa-6538-4a81-97b3-3f5d6ac7b6ec/deploy-status)](https://app.netlify.com/sites/khiphop-stack/deploys)
+
+Deployed Site: [khiphop-stack.netlify.app](https://khiphop-stack.netlify.app/)
 
 Heavily Inspired By:
 
-- [K-Pop Stack](https://github.dev/netlify-templates/kpop-stack)
-  - This stack also uses Netlify :), hence a korean music genre
-- [Remix Chop Suey Stack](https://github.dev/jkcorrea/remix-chop-suey-stack)
+- [K-Pop Stack](https://github.com/netlify-templates/kpop-stack)
+  - This stack also uses Netlify :), hence another korean music genre
+- [Remix Chop Suey Stack](https://github.com/jkcorrea/remix-chop-suey-stack)
   - Used a lot of the edge db / clerk setup
 
 Learn more about [Remix Stacks](https://remix.run/stacks).
@@ -24,31 +25,35 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/acerom/khiphop-stack)
 
+Don't like what's in this stack? Feel free to open up a PR, Issue, for this repo!
+
 ### What's in the stack
 
-- [Netlify](https://netlify.com/) deployment to the [Edge](https://www.netlify.com/products/edge) + deploy previews and CI/CD
-- [Clerk] For simple user authentication
-- [EdgeDB](https://supabase.com/) Next generation graph-relational database with [access policies]() for user security!
-- [Tailwind](https://tailwindcss.com/) for styling
-- [Cypress](https://cypress.io) end-to-end testing
-- [Prettier](https://prettier.io) code formatting
-- [ESLint](https://eslint.org) linting
+- [Netlify](https://netlify.com/) Deployment to the [Edge](https://www.netlify.com/products/edge) + deploy previews and CI/CD
+- [Clerk](https://clerk.dev/) For simple user authentication
+- [EdgeDB](https://www.edgedb.com/) Next generation graph-relational database with [access policies](https://www.edgedb.com/docs/datamodel/access_policies) for object level security
+- [Tailwind](https://tailwindcss.com/) For styling and [DaisyUI](https://daisyui.com/) for quick UI prototyping
+- [Cypress](https://cypress.io) End-to-end testing
+- [Prettier](https://prettier.io) Code formatting
+- [ESLint](https://eslint.org) Linting
 - [TypeScript](https://typescriptlang.org)
 
 ### Other Stuff
 
-- [Classnames] Uses `classnames` package for conditional styling
+- [Classnames](https://www.npmjs.com/package/classnames) For conditional styling
 - [Headless UI](https://headlessui.com/) Essential component primitives used for modals, popovers etc.
 - [Zod](https://github.com/colinhacks/zod) + [Remix Params Helper](https://github.com/kiliman/remix-params-helper) Server-sided form validation
-- [Conform](https://github.com/edmundhung/conform) Client sided form validation edmun for form validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation)
+- [Conform](https://github.com/edmundhung/conform) Great client sided form validation package by [edmundhung](https://github.com/edmundhung) using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation)
 - [Tiny Invariant](https://www.npmjs.com/package/tiny-invariant) Handy tool for validating the existence of variables
 - [Remix Flat Route](https://github.com/kiliman/remix-flat-routes) Flat file directory structure
 
 ### Why?
 
-- I like using the JAM stack
-- Using netlify to host, we can leverage a lot of built in CICD.
-- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and has overall been a smooth experience to visualize the db layer
+- Netlify has a lot of great features for CICD, DX and you also can opt in for usage on the [Edge](https://www.netlify.com/products/edge/)
+- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and has overall been a smooth developer experience. Since the release of [EdgeDB 2.0](https://www.edgedb.com/blog/edgedb-2-0), it has been easier to visualize the db layer / create queries using the `edgedb ui` command
+- I want to share my personal codebase preferences :)
+
+This repo is still in active development! To get an idea of what I'm working on, feel free to look at my [TODO](./TODO.md)
 
 ### Project Setup
 
@@ -71,45 +76,57 @@ For local development, first make sure you have edgedb installed (follow the [qu
 
 - Initialize your project
 
-```
+```sh
 edgedb project init
 ```
 
 - Now we need to create and apply the migrations to our new database
 
-```
+```sh
 edgedb migration create
 edgedb migration apply
 ```
 
 - Generate the edgedb types required for your project. All your types will now be located in `./app/db/edgeql`
 
-```
+```sh
 npm run generate:eql
 ```
 
-#### Setting Netlify Environment variables
+Make sure you installed all the packages
 
-For some reason, setting environment variables in the netlify UI
+```sh
+npm install
+```
 
-<details>
-  <summary>Environment Variable list in project dashboard.</summary>
+The Remix dev server starts your app in development mode, rebuilding assets on file changes. To start the Remix dev server:
 
-![screenshot of env vars in Netlify UI](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1649265873/CleanShot_2022-04-06_at_13.23.38_2x_sh3hoy.jpg)
+```sh
+npm run dev
+```
 
-</details>
+The Netlify CLI builds a production version of your Remix App Server and splits it into Netlify Functions that run locally. This includes any custom Netlify functions you've developed. The Netlify CLI runs all of this in its development mode.
 
-- Start dev server:
+It will pull in all the [environment variables](https://docs.netlify.com/configure-builds/environment-variables/#declare-variables) of your Netlify project. You can learn more about this project's EdgeDB environment variables in [the environment variables section](#environment-variables).
 
-  ```sh
-  npm run dev
-  ```
+To start the Netlify development environment:
 
-This starts your app in development mode, rebuilding assets on file changes.
+```sh
+netlify dev
+```
+
+With Netlify Dev you can also:
+
+- test functions
+- test redirects
+- share a live session via url with `netlify dev --live`
+- [and more](https://cli.netlify.com/netlify-dev/) :)
+
+Note: When running the Netlify CLI, file changes will rebuild assets, but you will not see the changes to the page you are on unless you do a browser refresh of the page. Due to how the Netlify CLI builds the Remix App Server, it does not support hot module reloading.
 
 ### Database Setup
 
-[EdgeDB UI DB Setup](https://res.cloudinary.com/dbupuyopo/image/upload/v1660096223/khiphop_stack_db_tepuji.png)
+![EdgeDB UI DB Setup](https://res.cloudinary.com/dbupuyopo/image/upload/v1660096223/khiphop_stack_db_tepuji.png)
 
 ```esdl
 module default {
@@ -136,67 +153,50 @@ module default {
 - When creating a new User, we only store their `clerk_id` and username
 - We define _object-level security_ using [access policies](https://www.edgedb.com/docs/datamodel/access_policies) such that users can only query, delete, and update _their own_ notes based on their `clerk_id`
 
-### Running Locally
-
-The Remix dev server starts your app in development mode, rebuilding assets on file changes. To start the Remix dev server:
-
-```sh
-npm run dev
-```
-
-The Netlify CLI builds a production version of your Remix App Server and splits it into Netlify Functions that run locally. This includes any custom Netlify functions you've developed. The Netlify CLI runs all of this in its development mode.
-
-It will pull in all the [environment variables](https://docs.netlify.com/configure-builds/environment-variables/#declare-variables) of your Netlify project. You can learn more about this project's EdgeDB environment variables in [the Database section](#database).
-
-To start the Netlify development environment:
-
-```sh
-netlify dev
-```
-
-With Netlify Dev you can also:
-
-- test functions
-- test redirects
-- share a live session via url with `netlify dev --live`
-- [and more](https://cli.netlify.com/netlify-dev/) :)
-
-Note: When running the Netlify CLI, file changes will rebuild assets, but you will not see the changes to the page you are on unless you do a browser refresh of the page. Due to how the Netlify CLI builds the Remix App Server, it does not support hot module reloading.
-
 ### Relevant code:
 
 This is a pretty simple CRUD note-taking app, but it's a good example of how you can build a full stack app with Remix, EdgeDB, and Netlify
 
-- creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
-- user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
-- creating, and deleting notes [./app/models/note.server.ts](./app/models/note.server.ts)
-- updating notes []()
+### Features
+
+- Clerk Routes
+  - Sign in [./apps/routes/\_auth](./apps/routes/_auth)
+  - Onboarding [./apps/routes/onboarding](./apps/routes/onboarding)
+    - After a user creates an account with clerk, we store the clerk_id and require the username/alias from the user before having access to our main app
+- CRUD operations in edgedb [./app/models](./app/models)
+- App Home (Placeholder dashboard home route incase the app gets more complex with more models/routes)
+  - [./app/routes/app.index.tsx](./app/routes/app.index.tsx)
+  - Right now this route will have one button to lead to the notes page
+- View Notes (With Note Search and Remove Note Option) [./app/routes/app.notes.index.tsx](./app/routes/app.notes.index.tsx)
+- View Note [./app/routes/app.note.\$noteId.tsx](./app/routes/app.note.$noteId.tsx)
+- New Note [./app/routes/app.notes.new.tsx](./app/routes/app.notes.new.tsx)
+- Edit Note [./app/routes/app.note.edit.\$noteId.tsx](./app/routes/app.note.edit.$noteId.tsx)
 
 ---
 
 ### Environment Variables
 
-You will need these 2 environment variables to connect to your Supabase instance:
+To set environment variables, you can use the Netlify UI:
 
-- `SUPABASE_ANON_KEY`:
+![screenshot of env vars in Netlify UI](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1649265873/CleanShot_2022-04-06_at_13.23.38_2x_sh3hoy.jpg)
 
-  Found in Settings/API/Project API keys
-  <details><summary> See screenshot</summary>
+Or you can add your environment variables to an `.env` file (like shown in the sample [`.env.sample`](./.env.sample)) which will not be committed publicly because it is added to the `.gitignore` file. Or you can add it to your Netlify project environment variables (Site settings/Build & deploy/Environment) as shown in the [Development section](#development) so that they can be [easily shared with teammates](https://www.netlify.com/blog/2021/12/09/use-access-and-share-environment-variables-on-netlify).
 
-  ![supabase anon key location](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1649193447/Screen_Shot_2022-04-05_at_5.15.45_PM_ipdgcc.jpg)
+> You will need these 2 environment variables to connect to your EdgeDB fly.io instance
 
-  </details>
+Please refer to [Connecting Netlify Deployment to a Fly Instance](###connecting-netlify-deployment-to-a-fly-instance) to learn how to get these variables
 
-- `SUPABASE_URL`:
+- `EDGEDB_DSN`:
+  - This is your main database URL link for your remote deployment. For local development you will just need to setup an edgedb instance offline
+- `EDGEDB_TLS_CA`:
+  - This is the TLS certificate key used to connect to your fly.io instance. [Documentation](https://www.edgedb.com/docs/reference/connection)
+  - You can grab this value with the following command
 
-  Found in Settings/API/Configuration/URL
-  <details><summary> See screenshot</summary>
+```sh
+flyctl ssh console -a $EDB_APP -C "edgedb-show-secrets.sh --format=shell EDGEDB_SERVER_TLS_CERT"
+```
 
-  ![supabase url location](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1649193610/Screen_Shot_2022-04-05_at_5.18.12_PM_sj7mj8.jpg)
-
-  </details>
-
-You can add your environment variables to an `.env` file (like shown in the sample [`.env.sample`](./.env.sample)) which will not be committed publicly because it is added to the `.gitignore` file. Or you can add it to your Netlify project environment variables (Site settings/Build & deploy/Environment) as shown in the [Development section](#development) so that they can be [easily shared with teammates](https://www.netlify.com/blog/2021/12/09/use-access-and-share-environment-variables-on-netlify).
+> For some reason, setting environment variables in the Netlify UI does [NOT WORK](https://answers.netlify.com/t/long-environment-variable-with-line-breaks-n/8514) for new lines (\n). To circumvent this, define your `EDGEDB_TLS_CA` variable inside your `netlify.toml` file or use a service like [Doppler](https://www.doppler.com/)
 
 ---
 
@@ -222,27 +222,56 @@ npm install netlify-cli -g # to install the Netlify CLI tool globally
 netlify init # initialize a new Netlify project & deploy
 ```
 
-### Creating Fly.io EdgeDB instance
-
-### Connecting Netlify Deployment to Fly.io instance
+### Connecting Netlify Deployment to a Fly instance
 
 - Deploy an EdgeDB instance to [fly.io](https://fly.io/) by following the setup instructions here: [Deploying EdgeDB to Fly.io](https://www.edgedb.com/docs/guides/deployment/fly_io)
-
-- Add your EdgeDB and session environment variables to a `.env` file like [`.env.sample`](./.env.sample) file or through the Netlify project dashboard at [https://app.netlify.com/](https://app.netlify.com/) Site settings/Build & deploy/Environment:
-
-  ```
-  SUPABASE_URL=""
-  SUPABASE_ANON_KEY=""
-  SESSION_SECRET=""
-  ```
-
 - Save your current fly config
 
 ```
 flyctl config save -a $EDB_APP
 ```
 
-- Connec
+- Make sure your services section looks like this:
+
+```toml
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    port = 5656
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
+```
+
+- Then run
+
+```sh
+flyctl deploy --image=edgedb/edgedb --remote-only --app $EDB_APP
+```
+
+- Your public EdgeDB DSN will be
+
+```sh
+edgedb://edgedb:$PASSWORD@$EDB_APP.fly.dev:5656
+```
+
+You will also need to set `EDGEDB_CLIENT_TLS_SECURITY=insecure`, but the secure way is to fetch the EdgeDB TLS certificate and specify it as `EDGEDB_TLS_CA` on Netlify. To grab the cert:
+
+```sh
+flyctl ssh console -a $EDB_APP -C "edgedb-show-secrets.sh --format=raw EDGEDB_SERVER_TLS_CERT"
+```
 
 ### CI/CD
 
