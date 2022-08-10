@@ -44,21 +44,21 @@ export default function Index() {
                 Check the README.md file for instructions on how to get this
                 project deployed.
               </p>
-              <div className="mx-auto mt-10 max-w-sm flex-col sm:flex sm:max-w-none sm:justify-center">
-                <div className="mx-auto max-w-sm">
-                  {(isUserOnboarded || isUserOnboarding) && user?.alias && (
+              <div className="mx-auto mt-10 flex max-w-sm items-center justify-center">
+                {(isUserOnboarded || isUserOnboarding) && user?.alias && (
+                  <div className="mx-auto max-w-sm">
                     <Link to="/app/notes" className="btn btn-primary btn-lg">
                       {isUserOnboarding && `Go back to Onboarding`}
                       {isUserOnboarded && `View Notes for ${user.alias}`}
                     </Link>
-                  )}
-                </div>
+                  </div>
+                )}
                 {!isUserOnboarded && !isUserOnboarding && (
-                  <div className="mt-4 space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
+                  <div className="mt-4">
                     <Link to="/join" className="btn bg-base-100">
                       Sign up
                     </Link>
-                    <Link to="/sign-in" className="btn btn-primary">
+                    <Link to="/sign-in" className="btn btn-primary ml-3">
                       Log In
                     </Link>
                   </div>

@@ -2,36 +2,18 @@
 
 Remix + EdgeDB + Netlify 🕺
 
-## Table of Contents
+![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660147140/localhost_3000__1_unqbsl.png)
 
-1. [QuickStart](###QuickStart)
-2. [Screenshots](###Screenshots)
-3. [What's in the stack](###What)
-4. [Other Stuff](###Other)
-5. [Deployment (Netlify)]()
-6. [Setting Up EdgeDB In fly.io]()
-7. [TODO](./TODO.md)
-
-![k-hip-pop site image](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1648844684/CleanShot_2022-04-01_at_16.23.40_2x_oo3ppe.jpg)
-
-Deployed Site: [kpop-stack.netlify.app](https://kpop-stack.netlify.app)
+Deployed Site: [khiphop-stack.netlify.app](https://khiphop-stack.netlify.app/)
 
 Heavily Inspired By:
 
 - [K-Pop Stack](https://github.dev/netlify-templates/kpop-stack)
-  - This stack also uses Netlify :) (K-Hip Hop is somewhat similar)
+  - This stack also uses Netlify :), hence a korean music genre
 - [Remix Chop Suey Stack](https://github.dev/jkcorrea/remix-chop-suey-stack)
-  - Used a lot of edge db / clerk setup
+  - Used a lot of the edge db / clerk setup
 
 Learn more about [Remix Stacks](https://remix.run/stacks).
-
-### Why?
-
-- I like using the JAM stack
-- Using netlify to host, we can leverage a lot of built in CICD.
-- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and has overall been a smooth experience to visualize the db layer
-
-### Quickstart
 
 ```
 npx create-remix --template acerom/khiphop-stack
@@ -61,7 +43,11 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 - [Tiny Invariant](https://www.npmjs.com/package/tiny-invariant) Handy tool for validating the existence of variables
 - [Remix Flat Route](https://github.com/kiliman/remix-flat-routes) Flat file directory structure
 
-### Screenshots
+### Why?
+
+- I like using the JAM stack
+- Using netlify to host, we can leverage a lot of built in CICD.
+- Supabase/Prisma is great, but I think edge db does a slightly better job with [migrations](https://www.edgedb.com/showcase/migrations), and has overall been a smooth experience to visualize the db layer
 
 ### Project Setup
 

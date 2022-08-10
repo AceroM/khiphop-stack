@@ -38,7 +38,7 @@ const AppHeader = ({ alias }: { alias?: string }) => (
       </div>
       <div className="navbar-end space-x-3">
         <p>{alias}</p>
-        <UserButton />
+        <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </div>
   </header>
