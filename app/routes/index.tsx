@@ -55,7 +55,7 @@ export default function Index() {
                 )}
                 {!isUserOnboarded && !isUserOnboarding && (
                   <div className="mt-4">
-                    <Link to="/join" className="btn bg-base-100">
+                    <Link to="/sign-up" className="btn bg-base-100">
                       Sign up
                     </Link>
                     <Link to="/sign-in" className="btn btn-primary ml-3">
