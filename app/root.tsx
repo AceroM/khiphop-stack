@@ -4,6 +4,7 @@ import {
   Links,
   LiveReload,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
   useCatch,
@@ -37,6 +38,7 @@ function App() {
         <Links />
       </head>
       <body>
+        <Outlet />
         <Toaster />
         <ScrollRestoration />
         <Scripts />

@@ -22,6 +22,9 @@ export default function Note() {
       <h1>{note.name}</h1>
       <p>{note.description}</p>
       <div className="flex flex-row-reverse gap-3">
+        <Link to={`/app/note/edit/${note.id}`} className="btn btn-primary">
+          Edit
+        </Link>
         <Link to="/app/notes" className="btn">
           Go Back
         </Link>

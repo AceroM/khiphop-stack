@@ -7,9 +7,9 @@ import { getFormData } from "remix-params-helper";
 import { z } from "zod";
 import { requireAuth } from "~/auth.server";
 import { createNote } from "~/models/note.server";
-import { requireHttpPost } from "~/utils";
-import { useToastErrors } from "~/utils/hooks.client";
+import { notifyErrorsInActionData, requireHttpPost } from "~/utils";
 import cx from "classnames";
+import { useEffect } from "react";
 
 export const meta: MetaFunction = () => {
   return {
@@ -35,7 +35,10 @@ export async function action({ request }: ActionArgs) {
 
 export default function CreateNewNote() {
   const actionData = useActionData<typeof action>();
-  useToastErrors(actionData);
+
+  useEffect(() => {
+    notifyErrorsInActionData(actionData);
+  }, [actionData]);
 
   const [fieldsetProps, { name, description }] = useFieldset(
     resolve(NewNoteSchema)

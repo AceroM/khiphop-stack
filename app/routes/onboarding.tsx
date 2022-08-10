@@ -6,12 +6,12 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import cx from "classnames";
 import { ConstraintViolationError } from "edgedb";
+import { useEffect } from "react";
 import { getFormData } from "remix-params-helper";
 import { z } from "zod";
 import { requireAuth } from "~/auth.server";
 import { createUser, getUserByClerkId } from "~/models/user.server";
-import { requireHttpPost } from "~/utils";
-import { useToastErrors } from "~/utils/hooks.client";
+import { notifyErrorsInActionData, requireHttpPost } from "~/utils";
 
 const OnboardingSchema = z.object({
   username: z.string().min(3).max(20),
@@ -52,9 +52,11 @@ export async function action({ request }: ActionArgs) {
 
 export default function Onboarding() {
   const actionData = useActionData<typeof action>();
-  useToastErrors(actionData);
-
   const [fieldsetProps, { username }] = useFieldset(resolve(OnboardingSchema));
+
+  useEffect(() => {
+    notifyErrorsInActionData(actionData);
+  }, [actionData]);
 
   return (
     <div className="mx-auto max-w-md px-4 pt-8 pb-36 sm:px-6 sm:pt-20 lg:px-8">

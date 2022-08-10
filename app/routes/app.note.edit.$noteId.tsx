@@ -10,14 +10,14 @@ import {
   useParams,
 } from "@remix-run/react";
 import cx from "classnames";
+import { useEffect } from "react";
 import { getFormData } from "remix-params-helper";
 import { notFound } from "remix-utils";
 import invariant from "tiny-invariant";
 import { z } from "zod";
 import { requireAuth } from "~/auth.server";
 import { getNote, updateNote } from "~/models/note.server";
-import { requireHttpPost } from "~/utils";
-import { useToastErrors } from "~/utils/hooks.client";
+import { notifyErrorsInActionData, requireHttpPost } from "~/utils";
 
 export async function loader({ request, params }: LoaderArgs) {
   const { userId } = await requireAuth(request);
@@ -65,7 +65,10 @@ export default function EditNote() {
   const { note } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   const params = useParams();
-  useToastErrors(actionData);
+
+  useEffect(() => {
+    notifyErrorsInActionData(actionData);
+  }, [actionData]);
 
   const [fieldsetProps, { name, description }] = useFieldset(
     resolve(EditNoteSchema)
@@ -112,7 +115,7 @@ export default function EditNote() {
             )}
           </div>
 
-          <div className="flex flex-row-reverse">
+          <div className="flex flex-row-reverse gap-3">
             <button type="submit" className="btn btn-primary">
               Update
             </button>
