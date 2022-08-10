@@ -18,4 +18,4 @@ node_modules
 
 
 /app/styles/tailwind.css
-app/db/edgeql
+# app/db/edgeql
