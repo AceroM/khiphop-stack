@@ -5,6 +5,7 @@ Remix + EdgeDB + Netlify 🕺
 ![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660147140/localhost_3000__1_unqbsl.png)
 
 Deployed Site: [khiphop-stack.netlify.app](https://khiphop-stack.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d636d6fa-6538-4a81-97b3-3f5d6ac7b6ec/deploy-status)](https://app.netlify.com/sites/khiphop-stack/deploys)
 
 Heavily Inspired By:
 
