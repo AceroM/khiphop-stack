@@ -41,12 +41,16 @@ export default function Index() {
               </p>
               <div className="mx-auto mt-10 flex max-w-sm items-center justify-center">
                 <div className="mx-auto max-w-sm">
-                  <Link to="/app/notes" className="btn btn-primary btn-lg">
-                    {isLoggedIn &&
-                      user?.is_onboarded &&
-                      `View Notes for ${user.alias}`}
-                    {isLoggedIn && !user && `Go Back to Onboarding`}
-                  </Link>
+                  {isLoggedIn && user?.is_onboarded && (
+                    <Link to="/app/notes" className="btn btn-primary btn-lg">
+                      View Notes for {user.alias}
+                    </Link>
+                  )}
+                  {isLoggedIn && !user && (
+                    <Link to="/onboarding" className="btn btn-primary btn-lg">
+                      Go Back to Onboarding
+                    </Link>
+                  )}
                 </div>
                 {!isLoggedIn && (
                   <div className="mt-4">
