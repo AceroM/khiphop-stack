@@ -14,6 +14,7 @@ const Note: $.$expr_PathNode<$.TypeSet<$Note, $.Cardinality.Many>, null, true> =
 export type $UserλShape = $.typeutil.flatten<_std.$Object_c88c66ee150611ed900d256aa1456aceλShape & {
   "clerk_id": $.PropertyDesc<_std.$str, $.Cardinality.One, true, false, false, false>;
   "alias": $.PropertyDesc<_std.$str, $.Cardinality.One, true, false, false, false>;
+  "is_onboarded": $.PropertyDesc<_std.$bool, $.Cardinality.One, false, false, false, true>;
   "<author[is Note]": $.LinkDesc<$Note, $.Cardinality.Many, {}, false, false,  false, false>;
   "<author": $.LinkDesc<$.ObjectType, $.Cardinality.Many, {}, false, false,  false, false>;
 }>;

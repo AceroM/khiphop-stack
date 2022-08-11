@@ -6,19 +6,15 @@ import { getUserByClerkId } from "~/models/user.server";
 
 export async function loader({ request }: LoaderArgs) {
   const auth = await getAuth(request);
-  let isUserOnboarding = false;
-  let isUserOnboarded = false;
-  let user;
+  let user = null;
   if (auth.userId) {
     user = await getUserByClerkId(auth.userId);
-    if (user) isUserOnboarded = true;
   }
-  return json({ isUserOnboarded, isUserOnboarding, user });
+  return json({ user, isLoggedIn: !!auth?.userId });
 }
 
 export default function Index() {
-  const { user, isUserOnboarded, isUserOnboarding } =
-    useLoaderData<typeof loader>();
+  const { user, isLoggedIn } = useLoaderData<typeof loader>();
 
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
@@ -44,15 +40,15 @@ export default function Index() {
                 project deployed.
               </p>
               <div className="mx-auto mt-10 flex max-w-sm items-center justify-center">
-                {(isUserOnboarded || isUserOnboarding) && user?.alias && (
-                  <div className="mx-auto max-w-sm">
-                    <Link to="/app/notes" className="btn btn-primary btn-lg">
-                      {isUserOnboarding && `Go back to Onboarding`}
-                      {isUserOnboarded && `View Notes for ${user.alias}`}
-                    </Link>
-                  </div>
-                )}
-                {!isUserOnboarded && !isUserOnboarding && (
+                <div className="mx-auto max-w-sm">
+                  <Link to="/app/notes" className="btn btn-primary btn-lg">
+                    {isLoggedIn &&
+                      user?.is_onboarded &&
+                      `View Notes for ${user.alias}`}
+                    {isLoggedIn && !user && `Go Back to Onboarding`}
+                  </Link>
+                </div>
+                {!isLoggedIn && (
                   <div className="mt-4">
                     <Link to="/sign-up" className="btn bg-base-100">
                       Sign up

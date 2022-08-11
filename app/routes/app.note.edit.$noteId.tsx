@@ -42,7 +42,7 @@ export const meta: MetaFunction = ({ data, params }) => {
 
 const EditNoteSchema = z.object({
   name: z.string().min(3).max(20),
-  description: z.string().min(3),
+  description: z.string().min(3).optional(),
 });
 
 export async function action({ request, params }: ActionArgs) {
@@ -54,7 +54,7 @@ export async function action({ request, params }: ActionArgs) {
   const { name, description } = result.data;
 
   try {
-    await updateNote(params.noteId, name, description, userId);
+    await updateNote(params.noteId, name, description || "", userId);
     return redirect(`/app/note/${params.noteId}`);
   } catch {
     return json({ errors: { action: "Error editing note" } });

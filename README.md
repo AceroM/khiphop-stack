@@ -1,8 +1,10 @@
 # Remix K-Hip Hop Stack
 
-Remix + EdgeDB w/access policies + Netlify 🕺
+Remix + EdgeDB + Netlify 🕺
 
 ![k-hip-pop stack site image](https://res.cloudinary.com/dbupuyopo/image/upload/v1660162528/remix-khiphop-stack_lji9ok.png)
+
+![App Demo](https://res.cloudinary.com/dbupuyopo/video/upload/v1660199017/khiphopstack-demo_vb0ptv_umpjfz.mov)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d636d6fa-6538-4a81-97b3-3f5d6ac7b6ec/deploy-status)](https://app.netlify.com/sites/khiphop-stack/deploys)
 

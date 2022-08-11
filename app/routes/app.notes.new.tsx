@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 
 const NewNoteSchema = z.object({
   name: z.string().min(3).max(20),
-  description: z.string().min(3),
+  description: z.string().min(3).optional(),
 });
 
 export async function action({ request }: ActionArgs) {
@@ -29,7 +29,7 @@ export async function action({ request }: ActionArgs) {
   if (!result.success) return json({ errors: result.errors });
 
   const { name, description } = result.data;
-  const { id } = await createNote(name, description, userId);
+  const { id } = await createNote(name, description || "", userId);
   return redirect(`/app/note/${id}`);
 }
 

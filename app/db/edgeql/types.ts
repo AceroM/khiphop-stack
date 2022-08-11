@@ -276,6 +276,7 @@ export interface Note extends std.$Object {
 export interface User extends std.$Object {
   "clerk_id": string;
   "alias": string;
+  "is_onboarded": boolean;
 }
 export namespace sys {
   export interface SystemObject extends schema.AnnotationSubject {}

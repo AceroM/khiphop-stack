@@ -4,6 +4,7 @@ module default {
   type User {
     required property clerk_id -> str { constraint exclusive };
     required property alias -> str { constraint exclusive };
+    required property is_onboarded -> bool { default := false };
   }
 
   type Note {
