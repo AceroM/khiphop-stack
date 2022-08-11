@@ -132,7 +132,7 @@ Note: When running the Netlify CLI, file changes will rebuild assets, but you wi
 
 ### Database Setup
 
-![EdgeDB UI DB Setup](https://res.cloudinary.com/dbupuyopo/image/upload/v1660096223/khiphop_stack_db_tepuji.png)
+![EdgeDB UI DB Setup](https://res.cloudinary.com/dbupuyopo/image/upload/v1660199764/khiphop_stack_db_ui_nf9ade.png)
 
 ```esdl
 module default {
@@ -141,6 +141,7 @@ module default {
   type User {
     required property clerk_id -> str { constraint exclusive };
     required property alias -> str { constraint exclusive };
+    required property is_onboarded -> bool { default := false };
   }
 
   type Note {
@@ -157,6 +158,7 @@ module default {
 ```
 
 - When creating a new User, we only store their `clerk_id` and username
+- We have an `is_onboarded` field that we set true once user passes onboarding. If onboarded a signed in user will always redirect to the app and vice versa.
 - We define _object-level security_ using [access policies](https://www.edgedb.com/docs/datamodel/access_policies) such that users can only query, delete, and update _their own_ notes based on their `clerk_id`
 
 ### Relevant code:
