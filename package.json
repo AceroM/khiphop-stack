@@ -29,7 +29,7 @@
     "/server/build"
   ],
   "dependencies": {
-    "@clerk/remix": "^1.0.1",
+    "@clerk/remix": "^1.1.3",
     "@conform-to/react": "^0.2.0",
     "@conform-to/zod": "^0.2.0",
     "@headlessui/react": "^1.6.6",
@@ -42,8 +42,8 @@
     "classnames": "^2.3.1",
     "daisyui": "^2.22.0",
     "edgedb": "^0.21.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-hot-toast": "^2.3.0",
     "remix-params-helper": "^0.4.10",
     "remix-utils": "^3.3.0",
