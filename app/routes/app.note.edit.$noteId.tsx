@@ -63,7 +63,6 @@ export async function action({ request, params }: ActionArgs) {
 
 export default function EditNote() {
   const { note } = useLoaderData<typeof loader>();
-  console.log(`note :>> `, note);
   const actionData = useActionData<typeof action>();
   const params = useParams();
 
