@@ -9,7 +9,7 @@ import {
   useLoaderData,
   useParams,
 } from "@remix-run/react";
-import cx from "classnames";
+import cx from "clsx";
 import { useEffect } from "react";
 import { getFormData } from "remix-params-helper";
 import { notFound } from "remix-utils";

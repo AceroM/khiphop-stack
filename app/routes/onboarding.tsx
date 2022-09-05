@@ -4,7 +4,7 @@ import { resolve } from "@conform-to/zod";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import cx from "classnames";
+import cx from "clsx";
 import { ConstraintViolationError } from "edgedb";
 import { useEffect } from "react";
 import { getFormData } from "remix-params-helper";

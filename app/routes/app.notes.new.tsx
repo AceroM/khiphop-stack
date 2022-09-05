@@ -8,7 +8,7 @@ import { z } from "zod";
 import { requireAuth } from "~/auth.server";
 import { createNote } from "~/models/note.server";
 import { notifyErrorsInActionData, requireHttpPost } from "~/utils";
-import cx from "classnames";
+import cx from "clsx";
 import { useEffect } from "react";
 
 export const meta: MetaFunction = () => {

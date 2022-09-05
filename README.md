@@ -38,7 +38,7 @@ Click this button to create a new Github repo, new Netlify project and deploy th
 
 ### Other Stuff
 
-- [Classnames](https://www.npmjs.com/package/classnames) For conditional styling
+- [Clsx](https://www.npmjs.com/package/clsx) For conditional styling
 - [Headless UI](https://headlessui.com/) Essential component primitives used for modals, popovers etc.
 - [Zod](https://github.com/colinhacks/zod) + [Remix Params Helper](https://github.com/kiliman/remix-params-helper) Server-sided form validation
 - [Conform](https://github.com/edmundhung/conform) Great client sided form validation package by [edmundhung](https://github.com/edmundhung) using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation)
