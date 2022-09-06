@@ -16,7 +16,7 @@ import type {
 } from "edgedb/dist/reflection/index";
 import {TypeKind, $mergeObjectTypes} from "edgedb/dist/reflection/index";
 
-// "@generated/" path gets replaced during generation step
+// "../" path gets replaced during generation step
 // @ts-ignore
 import * as castMaps from "../castMaps";
 

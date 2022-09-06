@@ -86,8 +86,8 @@ export type $number = $.ScalarType<"std::number", number>;
 const number: $.scalarTypeWithConstructor<$number, string> = $.makeType<$.scalarTypeWithConstructor<$number, string>>(_.spec, "00000000-0000-0000-0000-0000000001ff", _.syntax.literal);
 
 export type $BaseObjectλShape = $.typeutil.flatten<{
-  "id": $.PropertyDesc<$uuid, $.Cardinality.One, true, false, true, true>;
   "__type__": $.LinkDesc<_schema.$ObjectType, $.Cardinality.One, {}, false, false,  true, false>;
+  "id": $.PropertyDesc<$uuid, $.Cardinality.One, true, false, true, true>;
 }>;
 type $BaseObject = $.ObjectType<"std::BaseObject", $BaseObjectλShape, null>;
 const $BaseObject = $.makeType<$BaseObject>(_.spec, "c8881cd8-1506-11ed-8bf6-61819871af3c", _.syntax.literal);

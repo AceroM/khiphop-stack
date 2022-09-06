@@ -18,6 +18,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "cross-env NODE_ENV=production netlify dev",
     "typecheck": "tsc -b",
+    "seed": "npx esbuild-runner dbschema/seed.ts",
     "test": "vitest --passWithNoTests",
     "test:cov": "vitest --coverage --passWithNoTests"
   },
@@ -41,7 +42,7 @@
     "bcryptjs": "^2.4.3",
     "clsx": "^1.2.1",
     "daisyui": "^2.22.0",
-    "edgedb": "^0.21.3",
+    "edgedb": "^0.22.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.3.0",

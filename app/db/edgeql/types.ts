@@ -1,8 +1,8 @@
 import type * as edgedb from "edgedb";
 export namespace std {
   export interface BaseObject {
-    "id": string;
     "__type__": schema.ObjectType;
+    "id": string;
   }
   export interface $Object extends BaseObject {}
   export interface FreeObject extends BaseObject {}
@@ -54,8 +54,8 @@ export namespace schema {
     Deny = "Deny",
   }
   export interface Alias extends AnnotationSubject {
-    "expr": string;
     "type": Type;
+    "expr": string;
   }
   export interface Annotation extends InheritingObject, AnnotationSubject {
     "inheritable"?: boolean | null;
@@ -93,6 +93,7 @@ export namespace schema {
     "constraints": Constraint[];
   }
   export interface Constraint extends CallableObject, InheritingObject {
+    "subject"?: ConsistencySubject | null;
     "params": Parameter[];
     "expr"?: string | null;
     "subjectexpr"?: string | null;
@@ -100,7 +101,6 @@ export namespace schema {
     "errmessage"?: string | null;
     "delegated"?: boolean | null;
     "except_expr"?: string | null;
-    "subject"?: ConsistencySubject | null;
   }
   export interface Delta extends $Object {
     "parents": Delta[];
@@ -109,10 +109,10 @@ export namespace schema {
     "package": sys.ExtensionPackage;
   }
   export interface Function extends CallableObject, VolatilitySubject {
-    "preserves_optionality"?: boolean | null;
+    "used_globals": Global[];
     "body"?: string | null;
     "language": string;
-    "used_globals": Global[];
+    "preserves_optionality"?: boolean | null;
   }
   export interface Global extends AnnotationSubject {
     "target": Type;
@@ -126,17 +126,17 @@ export namespace schema {
     "except_expr"?: string | null;
   }
   export interface Pointer extends InheritingObject, ConsistencySubject, AnnotationSubject {
+    "source"?: Source | null;
+    "target"?: Type | null;
     "cardinality"?: Cardinality | null;
     "required"?: boolean | null;
     "readonly"?: boolean | null;
     "default"?: string | null;
     "expr"?: string | null;
-    "source"?: Source | null;
-    "target"?: Type | null;
   }
   export interface Source extends $Object {
-    "indexes": Index[];
     "pointers": Pointer[];
+    "indexes": Index[];
   }
   export interface Link extends Pointer, Source {
     "target"?: ObjectType | null;
@@ -153,16 +153,16 @@ export namespace schema {
   export interface ObjectType extends InheritingObject, ConsistencySubject, AnnotationSubject, Type, Source {
     "union_of": ObjectType[];
     "intersection_of": ObjectType[];
+    "links": Link[];
+    "properties": Property[];
     "access_policies": AccessPolicy[];
     "compound_type": boolean;
     "is_compound_type": boolean;
-    "links": Link[];
-    "properties": Property[];
   }
   export interface Operator extends CallableObject, VolatilitySubject {
     "operator_kind"?: OperatorKind | null;
-    "abstract"?: boolean | null;
     "is_abstract"?: boolean | null;
+    "abstract"?: boolean | null;
   }
   export enum OperatorKind {
     Infix = "Infix",
@@ -203,8 +203,8 @@ export namespace schema {
     DeferredRestrict = "DeferredRestrict",
   }
   export interface Tuple extends CollectionType {
-    "named": boolean;
     "element_types": TupleElement[];
+    "named": boolean;
   }
   export interface TupleElement extends std.BaseObject {
     "type": Type;
@@ -224,12 +224,12 @@ export namespace schema {
 export namespace cfg {
   export interface ConfigObject extends std.BaseObject {}
   export interface AbstractConfig extends ConfigObject {
+    "auth": Auth[];
     "session_idle_timeout": edgedb.Duration;
     "session_idle_transaction_timeout": edgedb.Duration;
     "query_execution_timeout": edgedb.Duration;
     "listen_port": number;
     "listen_addresses": string[];
-    "auth": Auth[];
     "allow_dml_in_functions"?: boolean | null;
     "allow_bare_ddl"?: AllowBareDDL | null;
     "apply_access_policies"?: boolean | null;
@@ -245,9 +245,9 @@ export namespace cfg {
     NeverAllow = "NeverAllow",
   }
   export interface Auth extends ConfigObject {
+    "method"?: AuthMethod | null;
     "priority": number;
     "user": string[];
-    "method"?: AuthMethod | null;
     "comment"?: string | null;
   }
   export interface AuthMethod extends ConfigObject {
@@ -268,12 +268,18 @@ export namespace cfg {
   }
   export interface Trust extends AuthMethod {}
 }
-export interface Note extends std.$Object {
+export interface HasCreatedAt extends std.$Object {
+  "created_at"?: Date | null;
+}
+export interface HasUpdatedAt extends std.$Object {
+  "updated_at"?: Date | null;
+}
+export interface Note extends HasCreatedAt, HasUpdatedAt {
   "author": User;
   "description"?: string | null;
   "name": string;
 }
-export interface User extends std.$Object {
+export interface User extends HasCreatedAt {
   "clerk_id": string;
   "alias": string;
   "is_onboarded": boolean;
@@ -288,11 +294,11 @@ export namespace sys {
     "version": {major: number, minor: number, stage: VersionStage, stage_no: number, local: string[]};
   }
   export interface Role extends SystemObject, schema.InheritingObject, schema.AnnotationSubject {
-    "name": string;
-    "superuser": boolean;
-    "is_superuser": boolean;
-    "password"?: string | null;
     "member_of": Role[];
+    "superuser": boolean;
+    "password"?: string | null;
+    "name": string;
+    "is_superuser": boolean;
   }
   export enum TransactionIsolation {
     RepeatableRead = "RepeatableRead",
@@ -374,6 +380,8 @@ export interface types {
     "Trust": cfg.Trust;
   };
   "default": {
+    "HasCreatedAt": HasCreatedAt;
+    "HasUpdatedAt": HasUpdatedAt;
     "Note": Note;
     "User": User;
   };

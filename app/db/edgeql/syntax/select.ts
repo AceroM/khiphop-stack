@@ -34,6 +34,7 @@ import {
 import type {
   $expr_PathLeaf,
   $expr_PathNode,
+  $linkPropify,
   ExpressionRoot,
   PathParent,
 } from "edgedb/dist/reflection/path";
@@ -90,6 +91,8 @@ export type SelectModifiers = {
   offset?: OffsetExpression | number;
   limit?: LimitExpression | number;
 };
+
+export type UnknownSelectModifiers = {[k in keyof SelectModifiers]: unknown};
 
 export type NormalisedSelectModifiers = {
   filter?: SelectFilterExpression;
@@ -216,7 +219,7 @@ type argCardToResultCard<
 
 export type InferFilterCardinality<
   Base extends TypeSet,
-  Filter extends TypeSet | undefined
+  Filter
 > = Filter extends TypeSet
   ? // Base is ObjectTypeExpression &
     Base extends ObjectTypeSet // $expr_PathNode
@@ -238,7 +241,7 @@ export type InferFilterCardinality<
               >
             : Base["__cardinality__"]
           : Base["__cardinality__"]
-        : Args[0] extends $expr_PathNode
+        : Args[0] extends $expr_PathNode<any, any, any>
         ? Args[0]["__exclusive__"] extends true
           ? //   Filter.args[0].parent.__element__ === Base.__element__
             Args[0]["__parent__"] extends null
@@ -274,7 +277,7 @@ export type InferFilterCardinality<
 
 export type InferOffsetLimitCardinality<
   Card extends Cardinality,
-  Modifers extends SelectModifiers
+  Modifers extends UnknownSelectModifiers
 > = Modifers["limit"] extends number | LimitExpression
   ? cardinalityUtil.overrideLowerBound<Card, "Zero">
   : Modifers["offset"] extends number | OffsetExpression
@@ -283,7 +286,7 @@ export type InferOffsetLimitCardinality<
 
 export type ComputeSelectCardinality<
   Expr extends ObjectTypeExpression,
-  Modifiers extends SelectModifiers
+  Modifiers extends UnknownSelectModifiers
 > = InferOffsetLimitCardinality<
   InferFilterCardinality<Expr, Modifiers["filter"]>,
   Modifiers
@@ -565,7 +568,10 @@ export type linkDescToLinkProps<Desc extends LinkDesc> = {
       Desc["properties"][k]["target"],
       Desc["properties"][k]["cardinality"]
     >,
-    {type: $scopify<Desc["target"]>; linkName: k},
+    {
+      type: $scopify<Desc["target"]>;
+      linkName: k;
+    },
     Desc["properties"][k]["exclusive"]
   >;
 };
@@ -575,6 +581,12 @@ export type pointersToObjectType<P extends ObjectTypePointers> = ObjectType<
   P,
   {}
 >;
+
+type linkDescToShape<L extends LinkDesc> = objectTypeToSelectShape<
+  L["target"]
+> &
+  objectTypeToSelectShape<pointersToObjectType<L["properties"]>> &
+  SelectModifiers;
 export type linkDescToSelectElement<L extends LinkDesc> =
   | boolean
   // | pointerToCastableExpression<Shape[k]>
@@ -582,14 +594,10 @@ export type linkDescToSelectElement<L extends LinkDesc> =
       anonymizeObject<L["target"]>,
       cardinalityUtil.assignable<L["cardinality"]>
     >
-  | (objectTypeToSelectShape<L["target"]> &
-      objectTypeToSelectShape<pointersToObjectType<L["properties"]>> &
-      SelectModifiers)
+  | linkDescToShape<L>
   | ((
       scope: $scopify<L["target"]> & linkDescToLinkProps<L>
-    ) => objectTypeToSelectShape<L["target"]> &
-      objectTypeToSelectShape<pointersToObjectType<L["properties"]>> &
-      SelectModifiers);
+    ) => linkDescToShape<L>);
 
 // object types -> pointers
 // pointers -> links
@@ -694,10 +702,17 @@ export function select<Expr extends TypeSet>(
 export function select<
   Expr extends ObjectTypeExpression,
   Shape extends objectTypeToSelectShape<Expr["__element__"]> & SelectModifiers,
-  Modifiers = Pick<Shape, SelectModifierNames>
+  Modifiers extends UnknownSelectModifiers = Pick<Shape, SelectModifierNames>
 >(
   expr: Expr,
-  shape: (scope: $scopify<Expr["__element__"]>) => Readonly<Shape>
+  shape: (
+    scope: $scopify<Expr["__element__"]> &
+      $linkPropify<{
+        [k in keyof Expr]: k extends "__cardinality__"
+          ? Cardinality.One
+          : Expr[k];
+      }>
+  ) => Readonly<Shape>
 ): $expr_Select<{
   __element__: ObjectType<
     `${Expr["__element__"]["__name__"]}`, // _shape

@@ -1,13 +1,24 @@
 module default {
   global current_user -> str;
 
-  type User {
+  abstract type HasCreatedAt {
+		property created_at -> datetime {
+			default := datetime_current();
+			readonly := true;
+		};
+	}
+
+  abstract type HasUpdatedAt {
+		property updated_at -> datetime { default := datetime_current() };
+	}
+
+  type User extending HasCreatedAt {
     required property clerk_id -> str { constraint exclusive };
     required property alias -> str { constraint exclusive };
     required property is_onboarded -> bool { default := false };
   }
 
-  type Note {
+  type Note extending HasCreatedAt, HasUpdatedAt {
     required link author -> User;
     required property name -> str;
     property description -> str;
