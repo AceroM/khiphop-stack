@@ -11,20 +11,13 @@ type $anydiscrete = $number | _cal.$local_date;
 
 type $anycontiguous = $decimal | $datetime | _cal.$local_datetime | $duration | $anyfloat;
 
-enum $JsonEmptyλEnum {
-  ReturnEmpty = "ReturnEmpty",
-  ReturnTarget = "ReturnTarget",
-  Error = "Error",
-  UseNull = "UseNull",
-  DeleteKey = "DeleteKey",
-}
 export type $JsonEmpty = {
   ReturnEmpty: $.$expr_Literal<$JsonEmpty>;
   ReturnTarget: $.$expr_Literal<$JsonEmpty>;
   Error: $.$expr_Literal<$JsonEmpty>;
   UseNull: $.$expr_Literal<$JsonEmpty>;
   DeleteKey: $.$expr_Literal<$JsonEmpty>;
-} & $.EnumType<"std::JsonEmpty", `${$JsonEmptyλEnum}`>;
+} & $.EnumType<"std::JsonEmpty", ["ReturnEmpty", "ReturnTarget", "Error", "UseNull", "DeleteKey"]>;
 const JsonEmpty: $JsonEmpty = $.makeType<$JsonEmpty>(_.spec, "c75bdc46-1506-11ed-82d3-3ff7298a0d46", _.syntax.literal);
 
 type $anyreal = $anyint | $anyfloat | $anynumeric;
@@ -4765,7 +4758,7 @@ function sequence_next(...args: any[]) {
 
 
 
-export { $JsonEmptyλEnum, JsonEmpty, bigint, bool, bytes, datetime, decimal, duration, float32, float64, int16, int32, int64, json, $sequence, str, uuid, number, $BaseObject, BaseObject, $Object_c88c66ee150611ed900d256aa1456ace, Object_c88c66ee150611ed900d256aa1456ace, $FreeObject, FreeObject };
+export { JsonEmpty, bigint, bool, bytes, datetime, decimal, duration, float32, float64, int16, int32, int64, json, $sequence, str, uuid, number, $BaseObject, BaseObject, $Object_c88c66ee150611ed900d256aa1456ace, Object_c88c66ee150611ed900d256aa1456ace, $FreeObject, FreeObject };
 
 export type { $anyscalar, $anypoint, $anydiscrete, $anycontiguous, $anyreal, $anyfloat, $anyint, $anynumeric };
 

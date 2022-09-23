@@ -4,116 +4,69 @@ import type * as _std from "./std";
 import type * as _sys from "./sys";
 import type * as _cfg from "./cfg";
 import type * as _default from "./default";
-enum $AccessKindλEnum {
-  Select = "Select",
-  UpdateRead = "UpdateRead",
-  UpdateWrite = "UpdateWrite",
-  Delete = "Delete",
-  Insert = "Insert",
-}
 export type $AccessKind = {
   Select: $.$expr_Literal<$AccessKind>;
   UpdateRead: $.$expr_Literal<$AccessKind>;
   UpdateWrite: $.$expr_Literal<$AccessKind>;
   Delete: $.$expr_Literal<$AccessKind>;
   Insert: $.$expr_Literal<$AccessKind>;
-} & $.EnumType<"schema::AccessKind", `${$AccessKindλEnum}`>;
+} & $.EnumType<"schema::AccessKind", ["Select", "UpdateRead", "UpdateWrite", "Delete", "Insert"]>;
 const AccessKind: $AccessKind = $.makeType<$AccessKind>(_.spec, "c8eb439e-1506-11ed-9585-8b318c2e3cd3", _.syntax.literal);
 
-enum $AccessPolicyActionλEnum {
-  Allow = "Allow",
-  Deny = "Deny",
-}
 export type $AccessPolicyAction = {
   Allow: $.$expr_Literal<$AccessPolicyAction>;
   Deny: $.$expr_Literal<$AccessPolicyAction>;
-} & $.EnumType<"schema::AccessPolicyAction", `${$AccessPolicyActionλEnum}`>;
+} & $.EnumType<"schema::AccessPolicyAction", ["Allow", "Deny"]>;
 const AccessPolicyAction: $AccessPolicyAction = $.makeType<$AccessPolicyAction>(_.spec, "c8eab708-1506-11ed-beeb-67169496533f", _.syntax.literal);
 
-enum $CardinalityλEnum {
-  One = "One",
-  Many = "Many",
-}
 export type $Cardinality = {
   One: $.$expr_Literal<$Cardinality>;
   Many: $.$expr_Literal<$Cardinality>;
-} & $.EnumType<"schema::Cardinality", `${$CardinalityλEnum}`>;
+} & $.EnumType<"schema::Cardinality", ["One", "Many"]>;
 const Cardinality: $Cardinality = $.makeType<$Cardinality>(_.spec, "c8e6f276-1506-11ed-9181-cbb11b6b8db1", _.syntax.literal);
 
-enum $OperatorKindλEnum {
-  Infix = "Infix",
-  Postfix = "Postfix",
-  Prefix = "Prefix",
-  Ternary = "Ternary",
-}
 export type $OperatorKind = {
   Infix: $.$expr_Literal<$OperatorKind>;
   Postfix: $.$expr_Literal<$OperatorKind>;
   Prefix: $.$expr_Literal<$OperatorKind>;
   Ternary: $.$expr_Literal<$OperatorKind>;
-} & $.EnumType<"schema::OperatorKind", `${$OperatorKindλEnum}`>;
+} & $.EnumType<"schema::OperatorKind", ["Infix", "Postfix", "Prefix", "Ternary"]>;
 const OperatorKind: $OperatorKind = $.makeType<$OperatorKind>(_.spec, "c8e88ee2-1506-11ed-af14-e53fc0df7352", _.syntax.literal);
 
-enum $ParameterKindλEnum {
-  VariadicParam = "VariadicParam",
-  NamedOnlyParam = "NamedOnlyParam",
-  PositionalParam = "PositionalParam",
-}
 export type $ParameterKind = {
   VariadicParam: $.$expr_Literal<$ParameterKind>;
   NamedOnlyParam: $.$expr_Literal<$ParameterKind>;
   PositionalParam: $.$expr_Literal<$ParameterKind>;
-} & $.EnumType<"schema::ParameterKind", `${$ParameterKindλEnum}`>;
+} & $.EnumType<"schema::ParameterKind", ["VariadicParam", "NamedOnlyParam", "PositionalParam"]>;
 const ParameterKind: $ParameterKind = $.makeType<$ParameterKind>(_.spec, "c8e9a62e-1506-11ed-85ad-7b6b4607e3ee", _.syntax.literal);
 
-enum $SourceDeleteActionλEnum {
-  DeleteTarget = "DeleteTarget",
-  Allow = "Allow",
-  DeleteTargetIfOrphan = "DeleteTargetIfOrphan",
-}
 export type $SourceDeleteAction = {
   DeleteTarget: $.$expr_Literal<$SourceDeleteAction>;
   Allow: $.$expr_Literal<$SourceDeleteAction>;
   DeleteTargetIfOrphan: $.$expr_Literal<$SourceDeleteAction>;
-} & $.EnumType<"schema::SourceDeleteAction", `${$SourceDeleteActionλEnum}`>;
+} & $.EnumType<"schema::SourceDeleteAction", ["DeleteTarget", "Allow", "DeleteTargetIfOrphan"]>;
 const SourceDeleteAction: $SourceDeleteAction = $.makeType<$SourceDeleteAction>(_.spec, "c8e80576-1506-11ed-a9c4-b97981ceebaf", _.syntax.literal);
 
-enum $TargetDeleteActionλEnum {
-  Restrict = "Restrict",
-  DeleteSource = "DeleteSource",
-  Allow = "Allow",
-  DeferredRestrict = "DeferredRestrict",
-}
 export type $TargetDeleteAction = {
   Restrict: $.$expr_Literal<$TargetDeleteAction>;
   DeleteSource: $.$expr_Literal<$TargetDeleteAction>;
   Allow: $.$expr_Literal<$TargetDeleteAction>;
   DeferredRestrict: $.$expr_Literal<$TargetDeleteAction>;
-} & $.EnumType<"schema::TargetDeleteAction", `${$TargetDeleteActionλEnum}`>;
+} & $.EnumType<"schema::TargetDeleteAction", ["Restrict", "DeleteSource", "Allow", "DeferredRestrict"]>;
 const TargetDeleteAction: $TargetDeleteAction = $.makeType<$TargetDeleteAction>(_.spec, "c8e77cb4-1506-11ed-87a7-49fdf751070c", _.syntax.literal);
 
-enum $TypeModifierλEnum {
-  SetOfType = "SetOfType",
-  OptionalType = "OptionalType",
-  SingletonType = "SingletonType",
-}
 export type $TypeModifier = {
   SetOfType: $.$expr_Literal<$TypeModifier>;
   OptionalType: $.$expr_Literal<$TypeModifier>;
   SingletonType: $.$expr_Literal<$TypeModifier>;
-} & $.EnumType<"schema::TypeModifier", `${$TypeModifierλEnum}`>;
+} & $.EnumType<"schema::TypeModifier", ["SetOfType", "OptionalType", "SingletonType"]>;
 const TypeModifier: $TypeModifier = $.makeType<$TypeModifier>(_.spec, "c8ea2eb4-1506-11ed-9da3-03e45e623e34", _.syntax.literal);
 
-enum $VolatilityλEnum {
-  Immutable = "Immutable",
-  Stable = "Stable",
-  Volatile = "Volatile",
-}
 export type $Volatility = {
   Immutable: $.$expr_Literal<$Volatility>;
   Stable: $.$expr_Literal<$Volatility>;
   Volatile: $.$expr_Literal<$Volatility>;
-} & $.EnumType<"schema::Volatility", `${$VolatilityλEnum}`>;
+} & $.EnumType<"schema::Volatility", ["Immutable", "Stable", "Volatile"]>;
 const Volatility: $Volatility = $.makeType<$Volatility>(_.spec, "c8e91dc6-1506-11ed-a2b5-97736c825a94", _.syntax.literal);
 
 export type $Object_c8ebea24150611edaa664fb273c501baλShape = $.typeutil.flatten<_std.$BaseObjectλShape & {
@@ -663,7 +616,7 @@ const TupleElement: $.$expr_PathNode<$.TypeSet<$TupleElement, $.Cardinality.Many
 
 
 
-export { $AccessKindλEnum, AccessKind, $AccessPolicyActionλEnum, AccessPolicyAction, $CardinalityλEnum, Cardinality, $OperatorKindλEnum, OperatorKind, $ParameterKindλEnum, ParameterKind, $SourceDeleteActionλEnum, SourceDeleteAction, $TargetDeleteActionλEnum, TargetDeleteAction, $TypeModifierλEnum, TypeModifier, $VolatilityλEnum, Volatility, $Object_c8ebea24150611edaa664fb273c501ba, Object_c8ebea24150611edaa664fb273c501ba, $SubclassableObject, SubclassableObject, $InheritingObject, InheritingObject, $AnnotationSubject, AnnotationSubject, $AccessPolicy, AccessPolicy, $Alias, Alias, $Annotation, Annotation, $Type, Type, $PrimitiveType, PrimitiveType, $CollectionType, CollectionType, $Array, Array, $CallableObject, CallableObject, $VolatilitySubject, VolatilitySubject, $Cast, Cast, $ConsistencySubject, ConsistencySubject, $Constraint, Constraint, $Delta, Delta, $Extension, Extension, $Function, Function, $Global, Global, $Index, Index, $Pointer, Pointer, $Source, Source, $Link, Link, $Migration, Migration, $Module, Module, $ObjectType, ObjectType, $Operator, Operator, $Parameter, Parameter, $Property, Property, $PseudoType, PseudoType, $Range, Range, $ScalarType, ScalarType, $Tuple, Tuple, $TupleElement, TupleElement };
+export { AccessKind, AccessPolicyAction, Cardinality, OperatorKind, ParameterKind, SourceDeleteAction, TargetDeleteAction, TypeModifier, Volatility, $Object_c8ebea24150611edaa664fb273c501ba, Object_c8ebea24150611edaa664fb273c501ba, $SubclassableObject, SubclassableObject, $InheritingObject, InheritingObject, $AnnotationSubject, AnnotationSubject, $AccessPolicy, AccessPolicy, $Alias, Alias, $Annotation, Annotation, $Type, Type, $PrimitiveType, PrimitiveType, $CollectionType, CollectionType, $Array, Array, $CallableObject, CallableObject, $VolatilitySubject, VolatilitySubject, $Cast, Cast, $ConsistencySubject, ConsistencySubject, $Constraint, Constraint, $Delta, Delta, $Extension, Extension, $Function, Function, $Global, Global, $Index, Index, $Pointer, Pointer, $Source, Source, $Link, Link, $Migration, Migration, $Module, Module, $ObjectType, ObjectType, $Operator, Operator, $Parameter, Parameter, $Property, Property, $PseudoType, PseudoType, $Range, Range, $ScalarType, ScalarType, $Tuple, Tuple, $TupleElement, TupleElement };
 
 type __defaultExports = {
   "AccessKind": typeof AccessKind;

@@ -54,12 +54,12 @@ export default function Index() {
                 </div>
                 {!isLoggedIn && (
                   <div className="mt-4">
-                    <Link to="/sign-up" className="btn bg-base-100">
+                    {/* <Link to="/sign-up" className="btn bg-base-100">
                       Sign up
                     </Link>
                     <Link to="/sign-in" className="btn btn-primary ml-3">
                       Log In
-                    </Link>
+                    </Link> */}
                   </div>
                 )}
               </div>

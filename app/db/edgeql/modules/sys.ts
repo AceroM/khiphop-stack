@@ -2,30 +2,19 @@ import { $ } from "edgedb";
 import * as _ from "../imports";
 import type * as _schema from "./schema";
 import type * as _std from "./std";
-enum $TransactionIsolationλEnum {
-  RepeatableRead = "RepeatableRead",
-  Serializable = "Serializable",
-}
 export type $TransactionIsolation = {
   RepeatableRead: $.$expr_Literal<$TransactionIsolation>;
   Serializable: $.$expr_Literal<$TransactionIsolation>;
-} & $.EnumType<"sys::TransactionIsolation", `${$TransactionIsolationλEnum}`>;
+} & $.EnumType<"sys::TransactionIsolation", ["RepeatableRead", "Serializable"]>;
 const TransactionIsolation: $TransactionIsolation = $.makeType<$TransactionIsolation>(_.spec, "cda42fea-1506-11ed-b97e-ed755eb9e877", _.syntax.literal);
 
-enum $VersionStageλEnum {
-  dev = "dev",
-  alpha = "alpha",
-  beta = "beta",
-  rc = "rc",
-  final = "final",
-}
 export type $VersionStage = {
   dev: $.$expr_Literal<$VersionStage>;
   alpha: $.$expr_Literal<$VersionStage>;
   beta: $.$expr_Literal<$VersionStage>;
   rc: $.$expr_Literal<$VersionStage>;
   final: $.$expr_Literal<$VersionStage>;
-} & $.EnumType<"sys::VersionStage", `${$VersionStageλEnum}`>;
+} & $.EnumType<"sys::VersionStage", ["dev", "alpha", "beta", "rc", "final"]>;
 const VersionStage: $VersionStage = $.makeType<$VersionStage>(_.spec, "cda4bb2c-1506-11ed-9168-9926c588201b", _.syntax.literal);
 
 export type $SystemObjectλShape = $.typeutil.flatten<_schema.$AnnotationSubjectλShape & {
@@ -190,7 +179,7 @@ function get_current_database(...args: any[]) {
 
 
 
-export { $TransactionIsolationλEnum, TransactionIsolation, $VersionStageλEnum, VersionStage, $SystemObject, SystemObject, $Database, Database, $ExtensionPackage, ExtensionPackage, $Role, Role };
+export { TransactionIsolation, VersionStage, $SystemObject, SystemObject, $Database, Database, $ExtensionPackage, ExtensionPackage, $Role, Role };
 
 type __defaultExports = {
   "TransactionIsolation": typeof TransactionIsolation;

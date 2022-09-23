@@ -1,24 +1,16 @@
 import { $ } from "edgedb";
 import * as _ from "../imports";
 import type * as _std from "./std";
-enum $AllowBareDDLλEnum {
-  AlwaysAllow = "AlwaysAllow",
-  NeverAllow = "NeverAllow",
-}
 export type $AllowBareDDL = {
   AlwaysAllow: $.$expr_Literal<$AllowBareDDL>;
   NeverAllow: $.$expr_Literal<$AllowBareDDL>;
-} & $.EnumType<"cfg::AllowBareDDL", `${$AllowBareDDLλEnum}`>;
+} & $.EnumType<"cfg::AllowBareDDL", ["AlwaysAllow", "NeverAllow"]>;
 const AllowBareDDL: $AllowBareDDL = $.makeType<$AllowBareDDL>(_.spec, "ce3b4330-1506-11ed-af37-f9783f66a2e0", _.syntax.literal);
 
-enum $ConnectionTransportλEnum {
-  TCP = "TCP",
-  HTTP = "HTTP",
-}
 export type $ConnectionTransport = {
   TCP: $.$expr_Literal<$ConnectionTransport>;
   HTTP: $.$expr_Literal<$ConnectionTransport>;
-} & $.EnumType<"cfg::ConnectionTransport", `${$ConnectionTransportλEnum}`>;
+} & $.EnumType<"cfg::ConnectionTransport", ["TCP", "HTTP"]>;
 const ConnectionTransport: $ConnectionTransport = $.makeType<$ConnectionTransport>(_.spec, "ce3bce36-1506-11ed-a646-b91ffbb91d41", _.syntax.literal);
 
 export type $memory = $.ScalarType<"cfg::memory", _.edgedb.ConfigMemory>;
@@ -158,7 +150,7 @@ function get_config_json(...args: any[]) {
 
 
 
-export { $AllowBareDDLλEnum, AllowBareDDL, $ConnectionTransportλEnum, ConnectionTransport, memory, $ConfigObject, ConfigObject, $AbstractConfig, AbstractConfig, $Auth, Auth, $AuthMethod, AuthMethod, $Config, Config, $DatabaseConfig, DatabaseConfig, $InstanceConfig, InstanceConfig, $JWT, JWT, $SCRAM, SCRAM, $Trust, Trust };
+export { AllowBareDDL, ConnectionTransport, memory, $ConfigObject, ConfigObject, $AbstractConfig, AbstractConfig, $Auth, Auth, $AuthMethod, AuthMethod, $Config, Config, $DatabaseConfig, DatabaseConfig, $InstanceConfig, InstanceConfig, $JWT, JWT, $SCRAM, SCRAM, $Trust, Trust };
 
 type __defaultExports = {
   "AllowBareDDL": typeof AllowBareDDL;
